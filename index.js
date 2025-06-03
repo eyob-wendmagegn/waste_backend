@@ -3,6 +3,8 @@ const mongoose = require("mongoose")
 const cors = require("cors")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
+require('dotenv').config();
+
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -19,11 +21,9 @@ app.use(
 app.use(express.json())
 
 // MongoDB Connection
+const url = process.env.MONGO_URL;
 mongoose
-  .connect("mongodb://localhost:27017/EyobDB", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(url)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error("MongoDB connection error:", err))
 
